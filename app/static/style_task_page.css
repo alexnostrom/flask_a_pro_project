@@ -1,0 +1,128 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #4071F4;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5%;
+    /*height: 15vh;*/
+}
+
+.todo {
+    display: flex;
+    margin: 0 auto;
+    height: 15vh;
+    align-items: flex-end;
+}
+
+.todo-text {
+    color: white;
+    font-weight: bold;
+    font-size: 6em;
+}
+
+.weather {
+    width: 20%;
+    background: white;
+    border-radius: 10px;
+    margin-left: 2%;
+    height: 15vh;
+}
+
+.weather-text {
+    margin-left: 20px;
+    color: #4071F4;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.hello-user {
+    height: 4vh;
+    width: 10%;
+    font-size: 1.5em;
+    color: #ffffff;
+}
+
+
+.log-out {
+    width: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+a {
+    text-decoration: none;
+}
+
+.log-out-button {
+    background: white;
+    color: #4071F4;
+    border-radius: 10px;
+    width: 100%;
+    border: none;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+
+.todo-enter {
+    margin: 3% auto 3% auto;
+    width: 60%;
+
+}
+
+
+.my-form {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+hr {
+    align-self: center;
+    background: white;
+    width: 60%;
+    height: 5px;
+}
+
+input {
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    width: 75%;
+    border: none;
+    outline: none;
+}
+
+.add-task {
+    border-radius: 20px;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 2.2rem;
+    font-weight: bold;
+    width: 15%;
+    border: none;
+    color: #4071F4;
+    background: white;
+}
+

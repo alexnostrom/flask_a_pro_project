@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block link_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style_task_page.css')}}">
+{% endblock %}
+{% block content %}
+<div class="main-container">
+    <div class="container">
+        <div class="weather"><span class="weather-text">Weather info:</span></div>
+        <div class="todo"><span class="todo-text">To-Do List</span></div>
+        <div class="hello-user">Hello, <b>{{ username }}</b></div>
+        <div class="log-out">
+            <form action="/logout" method="post">
+                <input class="log-out-button" type="submit" name="logout" value="Logout">
+            </form>
+        </div>
+    </div>
+    <div class="todo-enter">
+        <form action="/addtask" method="post" class="my-form">
+            <input type="text" name="task" placeholder="Enter your task" required>
+            <input class="add-task" type="submit" name="addTask" value="Add Task">
+        </form>
+    </div>
+    <hr>
+    <!--    <div class="todo-list-output"></div>-->
+    <!--    {% for task in tasks%}-->
+    <!--    <div>Task{{ task.id }} {{ task.discription }}</div>-->
+    <!--    {% endfor %}-->
+</div>
+{% endblock %}

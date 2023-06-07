@@ -114,15 +114,16 @@ input {
     outline: none;
 }
 
-.add-task {
+.tasks {
     border-radius: 20px;
     margin: 0 auto;
     padding: 10px;
     font-size: 2.2rem;
     font-weight: bold;
-    width: 15%;
+    width: 30%;
     border: none;
     color: #4071F4;
     background: white;
+    margin-left: 15px;
 }
 

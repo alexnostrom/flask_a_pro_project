@@ -5,13 +5,16 @@
 {% endblock %}
 {% block content %}
 <div>
-    <form action="registration" class="my-form">
+    <form action="register" method="post" class="my-form">
         <p class="register">Registration</p>
-        <input type="text" placeholder="Enter your name" required>
-        <input type="email" placeholder="Enter your e-mail" required>
-        <input type="password" placeholder="Enter your password" required>
-        <input type="password_check" placeholder="Confirm password" required>
+        <input name="username" type="text" placeholder="Enter your name" required>
+        <input name="email" type="email" placeholder="Enter your e-mail" required>
+        <input name="password" type="password" placeholder="Enter your password" required>
+        <input name="password_check" type="password" placeholder="Confirm password" required>
         <button type="submit"><span>Register</span></button>
+        {% for cat, msg in get_flashed_messages(True) %}
+        <div class="flash {{ cat }}">{{ msg }}</div>
+        {% endfor %}
     </form>
 </div>
 {% endblock %}

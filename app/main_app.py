@@ -1,18 +1,68 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect, session, g
+from configuration import Configuration
+from valid_check import registration_validation, login_validation
+from model import User, AddTask, db
+from functools import wraps
 
 app = Flask(__name__)
+app.config.from_object(Configuration)
+
+db.init_app(app)
+
+
+def login_required(function):
+	@wraps(function)
+	def decorated_function(*args, **kwargs):
+		if 'username' not in session:
+			return redirect(url_for('main_page'))
+		return function(*args, **kwargs)
+
+	return decorated_function
+
+
+def login_not_required(function):
+	@wraps(function)
+	def decorated_function(*args, **kwargs):
+		if 'username' in session:
+			return redirect(url_for('task_page'))
+		return function(*args, **kwargs)
+
+	return decorated_function
 
 
 # flask -A .\app\main_app.py run
 
 
 @app.route('/register', methods=["GET", "POST"])
+@login_not_required
 def register():
+	if request.method == "POST":
+		if registration_validation(request.form):
+			return render_template('registration.html', title='Страница регистрации пользователя')
+
+		username = request.form['username']
+		email = request.form['email']
+		password = request.form['password']
+		user = User(username=username, email=email)
+		user.set_password(password)
+		db.session.add(user)
+		db.session.commit()
+		session['username'] = username
+		return redirect(url_for('task_page'))
+
 	return render_template('registration.html', title='Страница регистрации пользователя')
 
 
 @app.route('/login', methods=["GET", "POST"])
+@login_not_required
 def login():
+	if request.method == "POST":
+		username = request.form['username']
+		if login_validation(request.form):
+			return render_template('login.html', title='Вход в личный кабинет')
+
+		session['username'] = username
+		return redirect(url_for('task_page'))
 	return render_template('login.html', title='Вход в личный кабинет')
 
 
@@ -22,22 +72,30 @@ def main_page():
 
 
 @app.route('/task_page', methods=["GET", "POST"])
+@login_required
 def task_page():
-	return render_template('task_page.html', title='Профиль', username='Alexey')
+	username = session.get('username')
+	return render_template('task_page.html', title='Профиль', username=username)
 
 
 @app.route('/logout', methods=["GET", "POST"])
 def logout():
-	print(request.form)
+	session.pop('username')
 	return render_template('main_page.html', title='Главная страница')
 
 
 @app.route('/addtask', methods=["GET", "POST"])
 def add_task():
-	if request.form['addTask']:
-		print(request.form['task'])
-	return render_template('task_page.html')
+	if request.form['task']:
+		username = session.get('username')
+		user_id = User.query.filter_by(username=username).first()
+		task = AddTask(body=request.form['task'], user_id=user_id.id)
+		# db.session.add(task)
+		# db.session.commit()
+		return render_template('task_page.html', username=username)
 
 
 if __name__ == '__main__':
 	app.run()
+	with app.app_context():
+		db.create_all()

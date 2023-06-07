@@ -66,3 +66,11 @@ button {
     height: 5vh;
     border: none;
 }
+
+.flash.error {
+    display: flex;
+    font-size: 1.5em;
+    color: orange;
+    flex-direction: row;
+    justify-content: center;
+}

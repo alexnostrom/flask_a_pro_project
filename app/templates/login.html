@@ -6,11 +6,14 @@
 {% endblock %}
 {% block content %}
 <div>
-    <form action="login" class="my-form">
+    <form action="login" method="post" class="my-form">
         <p class="register">Log in</p>
-        <input type="text" placeholder="Enter your name" required>
-        <input type="password" placeholder="Enter your password" required>
+        <input name="username" type="text" placeholder="Enter your name" required>
+        <input name="password" type="password" placeholder="Enter your password" required>
         <button type="submit"><span>Enter</span></button>
+        {% for cat, msg in get_flashed_messages(True) %}
+        <div class="flash {{ cat }}">{{ msg }}</div>
+        {% endfor %}
     </form>
 </div>
 {% endblock %}

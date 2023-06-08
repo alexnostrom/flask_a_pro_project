@@ -21,7 +21,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 5%;
-    /*height: 15vh;*/
+
 }
 
 .todo {
@@ -148,7 +148,8 @@ input {
     justify-content: center;
     width: 75%;
     margin: 0 auto;
-    margin-top: 4%;
+    margin-top: 1%;
+    margin-bottom: 3%;
 }
 
 .straight {

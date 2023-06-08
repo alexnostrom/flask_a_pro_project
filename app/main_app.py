@@ -90,13 +90,13 @@ def logout():
 
 @app.route('/addtask', methods=["GET", "POST"])
 def add_task():
+	username = session.get('username')
 	if request.form['task']:
-		username = session.get('username')
 		user_id = User.query.filter_by(username=username).first()
 		task = AddTask(body=request.form['task'], user_id=user_id.id)
 		db.session.add(task)
 		db.session.commit()
-		return render_template('task_page.html', username=username)
+		return redirect(url_for('task_page'))
 
 
 if __name__ == '__main__':

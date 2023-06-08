@@ -7,7 +7,11 @@
 {% block content %}
 <div class="main-container">
     <div class="container">
-        <div class="weather"><span class="weather-text">Weather info:</span></div>
+        <div class="weather">
+            <div class="weather-text">Weather info:</div>
+            <div class="weather-result">City: {{ city }}</div>
+            <div class="weather-result">Temperature: {{ temp }}</div>
+        </div>
         <div class="todo"><span class="todo-text">To-Do List</span></div>
         <div class="hello-user">Hello, <b>{{ username }}</b></div>
         <div class="log-out">
@@ -23,9 +27,17 @@
         </form>
     </div>
     <hr>
-    <!--    <div class="todo-list-output"></div>-->
-    <!--    {% for task in tasks%}-->
-    <!--    <div>Task{{ task.id }} {{ task.discription }}</div>-->
-    <!--    {% endfor %}-->
+    <div class="todo-list-output">
+        {% for task in tasks %}
+        <div class="straight">
+            <div class="task-id">Task#{{ task.id }}</div>
+            <div class="task-body">{{ task.body }}</div>
+            <form action="" method="post" class="delete-done">
+                <input class="done" type="submit" name="done" value="done">
+                <input class="delete" type="submit" name="delete" value="delete">
+            </form>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

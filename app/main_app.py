@@ -3,6 +3,7 @@ from configuration import Configuration
 from valid_check import registration_validation, login_validation
 from model import User, AddTask, db
 from functools import wraps
+from weather import weather
 
 app = Flask(__name__)
 app.config.from_object(Configuration)
@@ -60,7 +61,6 @@ def login():
 		username = request.form['username']
 		if login_validation(request.form):
 			return render_template('login.html', title='Вход в личный кабинет')
-
 		session['username'] = username
 		return redirect(url_for('task_page'))
 	return render_template('login.html', title='Вход в личный кабинет')
@@ -74,8 +74,12 @@ def main_page():
 @app.route('/task_page', methods=["GET", "POST"])
 @login_required
 def task_page():
+	local_weather = weather()
 	username = session.get('username')
-	return render_template('task_page.html', title='Профиль', username=username)
+	user_id = User.query.filter_by(username=username).first()
+	all_user_tasks = AddTask.query.filter_by(user_id=user_id.id).all()
+	return render_template('task_page.html', title='Профиль', username=username, tasks=all_user_tasks,
+						   city=local_weather.json['location']['name'], temp=local_weather.json['current']['temp_c'])
 
 
 @app.route('/logout', methods=["GET", "POST"])
@@ -90,8 +94,8 @@ def add_task():
 		username = session.get('username')
 		user_id = User.query.filter_by(username=username).first()
 		task = AddTask(body=request.form['task'], user_id=user_id.id)
-		# db.session.add(task)
-		# db.session.commit()
+		db.session.add(task)
+		db.session.commit()
 		return render_template('task_page.html', username=username)
 
 

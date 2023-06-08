@@ -38,6 +38,10 @@ body {
 }
 
 .weather {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
     width: 20%;
     background: white;
     border-radius: 10px;
@@ -46,10 +50,21 @@ body {
 }
 
 .weather-text {
-    margin-left: 20px;
+    display: flex;
+    align-self: center;
     color: #4071F4;
     font-weight: bold;
     font-size: 1.5em;
+    margin-bottom: 2%;
+}
+
+.weather-result {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #4071F4;
+    justify-content: center;
+    align-self: center;
+    margin: 1% auto;
 }
 
 .hello-user {
@@ -127,3 +142,67 @@ input {
     margin-left: 15px;
 }
 
+.todo-list-output {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 4%;
+}
+
+.straight {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 1% 1% 0 1%;
+
+}
+
+
+.task-id {
+    display: flex;
+    width: 15%;
+    color: white;
+    font-size: 2.5em;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-body {
+    display: flex;
+    width: 60%;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-done {
+    width: 30%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.done {
+    font-weight: bold;
+    font-size: 1.5em;
+    background: #75DC86;
+    border-radius: 10px;
+    width: 40%;
+    color: white;
+}
+
+.delete {
+    font-weight: bold;
+    font-size: 1.5em;
+    background: #F97B7B;
+    border-radius: 10px;
+    width: 40%;
+    color: white;
+}

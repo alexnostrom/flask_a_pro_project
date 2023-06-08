@@ -19,6 +19,7 @@ class User(db.Model):
 
 
 class AddTask(db.Model):
+	__tablename__ = 'tasks'
 	id = db.Column(db.Integer, primary_key=True)
 	body = db.Column(db.Text(140))
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

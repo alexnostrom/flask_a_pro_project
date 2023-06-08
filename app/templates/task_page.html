@@ -30,17 +30,17 @@
     <div class="todo-list-output">
         {% for task in tasks %}
         <div class="straight">
-            <div class="task-id">Task#{{ task.id }}</div>
+            <div class="task-id">Task#{{ loop.index }}</div>
             <div class="task-body">{{ task.body }}</div>
             <div class="delete-done">
-                <form class="done-delete-bottons" action="/task/{{ task.id }}/done" method="post">
+                <form class="done-delete-bottons" action="/task/{{ task.id }}/{{ task.user_id }}/done" method="post">
                     {% if task.task_ready_status == 1 %}
                     <input class="done" type="submit" name="done" value="done">
                     {% else %}
                     <input class="undone" type="submit" name="done" value="undone">
                     {% endif %}
                 </form>
-                <form class="done-delete-bottons" action="/task/{{ task.id }}/delete" method="post">
+                <form class="done-delete-bottons" action="/task/{{ task.id }}/{{ task.user_id }}/delete" method="post">
                     <input class="delete" type="submit" name="delete" value="delete">
                 </form>
             </div>

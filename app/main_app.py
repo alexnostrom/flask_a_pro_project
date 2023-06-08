@@ -99,20 +99,20 @@ def add_task():
 		return redirect(url_for('task_page'))
 
 
-@app.route('/task/<id>/delete', methods=["GET", "POST"])
-def delete(id):
+@app.route('/task/<id>/<user_id>/delete', methods=["GET", "POST"])
+def delete(id, user_id):
 	if request.method == "POST":
-		task = AddTask.query.filter_by(id=int(id)).first()
+		task = AddTask.query.filter_by(id=int(id), user_id=int(user_id)).first()
 		if task is not None:
 			db.session.delete(task)
 			db.session.commit()
 			return redirect(url_for('task_page'))
 
 
-@app.route('/task/<id>/done', methods=["GET", "POST"])
-def done(id):
+@app.route('/task/<id>/<user_id>/done', methods=["GET", "POST"])
+def done(id, user_id):
 	if request.method == "POST":
-		task = AddTask.query.filter_by(id=int(id)).first()
+		task = AddTask.query.filter_by(id=int(id), user_id=int(user_id)).first()
 		if task is not None:
 			if task.task_ready_status:
 				task.task_ready_status = 0
@@ -121,6 +121,7 @@ def done(id):
 				task.task_ready_status = 1
 				db.session.commit()
 			return redirect(url_for('task_page'))
+
 
 if __name__ == '__main__':
 	app.run()

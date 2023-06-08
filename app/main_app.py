@@ -99,6 +99,29 @@ def add_task():
 		return redirect(url_for('task_page'))
 
 
+@app.route('/task/<id>/delete', methods=["GET", "POST"])
+def delete(id):
+	if request.method == "POST":
+		task = AddTask.query.filter_by(id=int(id)).first()
+		if task is not None:
+			db.session.delete(task)
+			db.session.commit()
+			return redirect(url_for('task_page'))
+
+
+@app.route('/task/<id>/done', methods=["GET", "POST"])
+def done(id):
+	if request.method == "POST":
+		task = AddTask.query.filter_by(id=int(id)).first()
+		if task is not None:
+			if task.task_ready_status:
+				task.task_ready_status = 0
+				db.session.commit()
+			else:
+				task.task_ready_status = 1
+				db.session.commit()
+			return redirect(url_for('task_page'))
+
 if __name__ == '__main__':
 	app.run()
 	with app.app_context():

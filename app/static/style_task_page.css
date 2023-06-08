@@ -182,7 +182,7 @@ input {
 }
 
 .delete-done {
-    width: 30%;
+    width: 25%;
     margin: 0 auto;
     display: flex;
     justify-content: space-around;
@@ -195,7 +195,16 @@ input {
     font-size: 1.5em;
     background: #75DC86;
     border-radius: 10px;
-    width: 40%;
+    width: 100%;
+    color: white;
+}
+
+.undone {
+    font-weight: bold;
+    font-size: 1.5em;
+    background: #dc75bb;
+    border-radius: 10px;
+    width: 100%;
     color: white;
 }
 
@@ -204,6 +213,12 @@ input {
     font-size: 1.5em;
     background: #F97B7B;
     border-radius: 10px;
-    width: 40%;
+    width: 100%;
     color: white;
+}
+
+
+
+.done-delete-bottons{
+    width: 40%;
 }

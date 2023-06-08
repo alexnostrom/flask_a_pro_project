@@ -31,9 +31,6 @@ def login_not_required(function):
 	return decorated_function
 
 
-# flask -A .\app\main_app.py run
-
-
 @app.route('/register', methods=["GET", "POST"])
 @login_not_required
 def register():
